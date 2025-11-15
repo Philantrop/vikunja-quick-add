@@ -10,7 +10,7 @@
   },
   "scripts": {
     "lint": "echo 'Add eslint here if desired'",
-    "build": "npm run clean && npm run copy",
+    "build": "./build.sh",
     "clean": "rm -rf dist",
     "copy": "mkdir -p dist && cp -r src public assets manifest.json LICENSE dist/",
     "package": "npm run build && cd dist && zip -r ../vikunja-quick-add.zip .",
