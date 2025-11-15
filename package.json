@@ -1,0 +1,30 @@
+{
+  "name": "vikunja-quick-add",
+  "version": "2.4.1",
+  "description": "Chrome extension for quickly adding tasks to Vikunja (requires v1.0.0+)",
+  "author": "Wulf C. Krueger",
+  "license": "AGPL-3.0-or-later",
+  "private": true,
+  "engines": {
+    "vikunja": ">=1.0.0"
+  },
+  "scripts": {
+    "lint": "echo 'Add eslint here if desired'",
+    "build": "npm run clean && npm run copy",
+    "clean": "rm -rf dist",
+    "copy": "mkdir -p dist && cp -r src public assets manifest.json LICENSE dist/",
+    "package": "npm run build && cd dist && zip -r ../vikunja-quick-add.zip .",
+    "watch": "echo 'Development mode - load unpacked extension from root directory'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/philantrop/vikunja-quick-add.git"
+  },
+  "keywords": [
+    "chrome-extension",
+    "vikunja",
+    "task-management",
+    "productivity"
+  ],
+  "devDependencies": {}
+}
