@@ -1,5 +1,7 @@
 # Vikunja Quick Add
 
+[![Build and Release](https://github.com/philantrop/vikunja-quick-add/actions/workflows/release.yml/badge.svg)](https://github.com/philantrop/vikunja-quick-add/actions/workflows/release.yml)
+
 A Chrome extension for quickly adding tasks to Vikunja from your browser.
 
 ## Requirements

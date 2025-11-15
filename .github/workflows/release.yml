@@ -1,0 +1,75 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger on version tags like v1.0.0, v2.4.1, etc.
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Get version from tag
+        id: get_version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "Building version: $VERSION"
+          
+      - name: Verify version matches manifest
+        run: |
+          MANIFEST_VERSION=$(grep '"version"' manifest.json | head -1 | sed 's/.*"version": "\(.*\)".*/\1/')
+          TAG_VERSION="${{ steps.get_version.outputs.VERSION }}"
+          echo "Manifest version: $MANIFEST_VERSION"
+          echo "Tag version: $TAG_VERSION"
+          if [ "$MANIFEST_VERSION" != "$TAG_VERSION" ]; then
+            echo "Error: Version mismatch between tag ($TAG_VERSION) and manifest.json ($MANIFEST_VERSION)"
+            exit 1
+          fi
+          
+      - name: Build extension
+        run: |
+          chmod +x build.sh
+          ./build.sh
+          
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref_name }}
+          body: |
+            ## Vikunja Quick Add ${{ github.ref_name }}
+            
+            Chrome extension for quickly adding tasks to Vikunja.
+            
+            ### Installation
+            1. Download the `vikunja-quick-add-${{ github.ref_name }}.zip` file below
+            2. Unzip the file
+            3. Open Chrome and navigate to `chrome://extensions/`
+            4. Enable "Developer mode"
+            5. Click "Load unpacked" and select the unzipped folder
+            
+            ### Requirements
+            - Vikunja v1.0.0 or newer
+            - Chrome/Chromium-based browser
+            
+            See the [README](https://github.com/philantrop/vikunja-quick-add/blob/main/README.md) for full documentation.
+          draft: false
+          prerelease: false
+          
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./vikunja-quick-add-v${{ steps.get_version.outputs.VERSION }}.zip
+          asset_name: vikunja-quick-add-v${{ steps.get_version.outputs.VERSION }}.zip
+          asset_content_type: application/zip
