@@ -37,13 +37,9 @@ jobs:
           ./build.sh
           
       - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref_name }}
+          files: vikunja-quick-add-v${{ steps.get_version.outputs.VERSION }}.zip
           body: |
             ## Vikunja Quick Add ${{ github.ref_name }}
             
@@ -63,13 +59,3 @@ jobs:
             See the [README](https://github.com/philantrop/vikunja-quick-add/blob/main/README.md) for full documentation.
           draft: false
           prerelease: false
-          
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./vikunja-quick-add-v${{ steps.get_version.outputs.VERSION }}.zip
-          asset_name: vikunja-quick-add-v${{ steps.get_version.outputs.VERSION }}.zip
-          asset_content_type: application/zip
