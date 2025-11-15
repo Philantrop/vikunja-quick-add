@@ -34,6 +34,5 @@
   },
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self'"
-  },
-  "privacy_policy": "https://turing.mailstation.de/privacy-policy/"
+  }
 }
