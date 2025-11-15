@@ -34,7 +34,7 @@ Your API token must have the following permissions:
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/vikunja-quick-add.git
+   git clone https://github.com/philantrop/vikunja-quick-add.git
    cd vikunja-quick-add
    ```
 
@@ -214,10 +214,7 @@ For issues, questions, or feature requests, please open an issue on the GitHub r
 
 ## Documentation
 
-- **[COMPATIBILITY.md](COMPATIBILITY.md)** - Vikunja version compatibility guide
 - **[FEATURES.md](FEATURES.md)** - Detailed feature usage guide
-- **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** - Common issues and solutions
-- **[TESTING.md](TESTING.md)** - Testing checklist for contributors
-- **[CHANGELOG.md](CHANGELOG.md)** - Version history and changes
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
 
 
