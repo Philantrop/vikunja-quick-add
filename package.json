@@ -1,6 +1,6 @@
 {
   "name": "vikunja-quick-add",
-  "version": "2.4.1",
+  "version": "2.5.1",
   "description": "Chrome extension for quickly adding tasks to Vikunja (requires v1.0.0+)",
   "author": "Wulf C. Krueger",
   "license": "AGPL-3.0-or-later",

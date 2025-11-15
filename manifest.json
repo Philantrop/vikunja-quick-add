@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Vikunja Quick Add",
-  "version": "2.4.1",
+  "version": "2.5.1",
   "description": "Quickly add tasks to Vikunja from your browser (requires Vikunja v1.0.0+)",
   "author": "Wulf C. Krueger",
   "homepage_url": "https://github.com/philantrop/vikunja-quick-add",
